@@ -16,13 +16,13 @@ public class Part {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String nome;
-	private Integer revisao;
-	private LocalDate data;
+	private String name;
+	private Integer revision;
+	private LocalDate date;
 	@ManyToOne
-	private Pasta pasta;
-	@OneToMany(mappedBy = "parte")
-	private List<Modificacao> modificacao;
+	private Groupp groupp;
+	@OneToMany(mappedBy = "part")
+	private List<Revision> revisions;
 	
 	public Integer getId() {
 		return id;
@@ -30,36 +30,39 @@ public class Part {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public Integer getRevisao() {
-		return revisao;
+	public Integer getRevision() {
+		return revision;
 	}
-	public void setRevisao(Integer revisao) {
-		this.revisao = revisao;
+	public void setRevision(Integer revision) {
+		this.revision = revision;
 	}
-	public LocalDate getData() {
-		return data;
+	public LocalDate getDate() {
+		return date;
 	}
-	public void setData(LocalDate data) {
-		this.data = data;
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
-	public Pasta getPasta() {
-		return pasta;
+	public Groupp getGroupp() {
+		return groupp;
 	}
-	public void setPasta(Pasta pasta) {
-		this.pasta = pasta;
+	public void setGroupp(Groupp groupp) {
+		this.groupp = groupp;
 	}
-	public List<Modificacao> getModificacao() {
-		return modificacao;
+	public List<Revision> getRevisions() {
+		return revisions;
 	}
-	public void setModificacao(List<Modificacao> modificacao) {
-		this.modificacao = modificacao;
+	public void setRevisions(List<Revision> revisions) {
+		this.revisions = revisions;
 	}
+	
+	
+	
 	
 	
 	

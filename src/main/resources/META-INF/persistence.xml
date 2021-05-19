@@ -10,12 +10,12 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:jboss/datasource/partes</jta-data-source>
 		<class>com.lucinda.models.Part</class>
-		<class>com.lucinda.models.Pasta</class>
-		<class>com.lucinda.models.Modificacao</class>
+		<class>com.lucinda.models.Groupp</class>
+		<class>com.lucinda.models.Revision</class>
 		<properties>
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.PostgreSQL95Dialect" />
-			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 		</properties>

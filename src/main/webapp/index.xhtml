@@ -1,10 +1,53 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
-      
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+</h:head>
+<f:metadata>
+
+</f:metadata>
+
+<h:body>
 	<f:view>
-		<h:outputLabel value="Hello, world"/>
+		<h:outputLabel value="Hello, world," />
+		<br />
 	</f:view>
+	<f:metadata>
+		<f:event type="preRenderView" listener="#{GrouppBean.listAll()}" />
+	</f:metadata>
+
+	<f:view>
+		<ui:repeat var="groupp" value="#{GrouppBean.groupps}">
+			<h:outputLabel value="#{groupp.name}" />
+			<br />
+		</ui:repeat>
+	</f:view>
+
+	<h:form>
+Name: <h:inputText value="#{GrouppBean.groupp.name}" />
+Date:
+        <p:calendar id="revDate" value="#{GrouppBean.groupp.revDate}"
+			pattern="dd.MM.yyyy" mask="true">
+			<f:convertDateTime type="localDate" pattern="dd.MM.yyyy" />
+		</p:calendar>
+
+		<h:commandButton action="#{GrouppBean.add()}" value="Adicionar" />
+
+	</h:form>
+	<h:form>
+		<h:link value="partes" outcome="partsNav">
+			<f:param name="grouppId" value="2"></f:param>
+		</h:link>
+	</h:form>
+
+
+
+
+
+</h:body>
 </html>

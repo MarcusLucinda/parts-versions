@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+</h:head>
+<f:metadata>
+<f:viewParam name="grouppId" value="#{PartsBean.grouppId}"></f:viewParam>
+<f:event type="preRenderView" listener="#{PartsBean.listAll()}" />
+</f:metadata>
+
+<h:body>
+	<f:view>
+		<h:outputLabel value="Hello, world," /><br/>
+		<h:outputLabel value="#{PartsBean.grouppId}" />.
+		<ui:repeat var="part" value="#{PartsBean.parts}">
+		<h:outputLabel value="#{part.name}" />
+		</ui:repeat>
+	</f:view>
+
+</h:body>
+</html>
