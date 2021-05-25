@@ -3,39 +3,52 @@ package com.lucinda.beans;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.lucinda.managers.GrouppManager;
 import com.lucinda.managers.PartManager;
 import com.lucinda.models.Part;
 
 
 
 @Named("PartsBean")
-@RequestScoped
+@ApplicationScoped
 public class PartsBean implements Serializable {
 
 	private List<Part> parts;
 	private Part part = new Part();
 	@Inject
 	private PartManager pm;
+	@Inject
+	private GrouppManager gm;
 	private Integer grouppId;
-	
-	public void listAll(){
-		this.parts = pm.listParts(grouppId);
-		for (Part part : parts) {
-			System.out.println("nome " + part.getName());
+
+
+	public String selectGroupp(Integer id) {
+		this.parts = null;
+		return "partsNav?faces-redirect=true&grouppId="+id;
+	}
+
+	public void listAll() {
+		if(parts == null) {
+			this.parts = pm.listParts(grouppId);
+			for (Part part : parts) {
+				System.out.println("nome " + part.getName());
+			}
 		}
 	}
-	
-	public void add() {
+
+	public String add() {
+		this.part.setGroupp(gm.selectGroupp(this.grouppId));
+		this.part.setRevision(0);
 		pm.createPart(part);;
 		this.parts = pm.listParts(grouppId);
 		this.part = new Part();
+		return "partsNav?faces-redirect=true&grouppId="+this.grouppId;
 	}
-	
+
 	public List<Part> getParts() {
 		return parts;
 	}
@@ -62,7 +75,7 @@ public class PartsBean implements Serializable {
 	public void setGrouppId(Integer grouppId) {
 		this.grouppId = grouppId;
 	}
-	
-	
-	
+
+
+
 }

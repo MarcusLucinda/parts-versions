@@ -4,7 +4,10 @@ package com.lucinda.beans;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -12,7 +15,7 @@ import com.lucinda.managers.GrouppManager;
 import com.lucinda.models.Groupp;
 
 @Named("GrouppBean")
-@RequestScoped 
+@ApplicationScoped 
 public class GrouppBean implements Serializable {
 	
 	private List<Groupp> groupps;
@@ -21,17 +24,21 @@ public class GrouppBean implements Serializable {
 	private GrouppManager gm;
 	
 	public void listAll(){
-		this.groupps = gm.listGroupps();
-		for (Groupp groupp : groupps) {
-			System.out.println("nome " + groupp.getName());
+		if(groupps == null) {
+			this.groupps = gm.listGroupps();
+			for (Groupp groupp : groupps) {
+				System.out.println("nome " + groupp.getName());
+			}
 		}
 	}
 	
-	public void add() {
+	public String add() {
 		gm.createGroup(groupp);
 		this.groupps = gm.listGroupps();
 		this.groupp = new Groupp();
+		return "index?faces-redirect=true";
 	}
+	
 
 	public List<Groupp> getGroupps() {
 		return groupps;

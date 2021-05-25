@@ -7,47 +7,53 @@
 
 
 <h:head>
+	<h:outputStylesheet name="css/primeflex.css" />
 </h:head>
 <f:metadata>
 
 </f:metadata>
 
 <h:body>
-	<f:view>
-		<h:outputLabel value="Hello, world," />
-		<br />
-	</f:view>
 	<f:metadata>
 		<f:event type="preRenderView" listener="#{GrouppBean.listAll()}" />
 	</f:metadata>
-
-	<f:view>
-		<ui:repeat var="groupp" value="#{GrouppBean.groupps}">
-			<h:outputLabel value="#{groupp.name}" />
-			<br />
-		</ui:repeat>
-	</f:view>
-
 	<h:form>
-Name: <h:inputText value="#{GrouppBean.groupp.name}" />
-Date:
-        <p:calendar id="revDate" value="#{GrouppBean.groupp.revDate}"
-			pattern="dd.MM.yyyy" mask="true">
-			<f:convertDateTime type="localDate" pattern="dd.MM.yyyy" />
-		</p:calendar>
-
-		<h:commandButton action="#{GrouppBean.add()}" value="Adicionar" />
-
-	</h:form>
-	<h:form>
-		<h:link value="partes" outcome="partsNav">
-			<f:param name="grouppId" value="2"></f:param>
-		</h:link>
+		<div class="card">
+			<div class="p-formgroup-inline">
+				<div class="p-field">
+					<p:outputLabel for="name" styleClass="ui-sr-only" value="Name" />
+					<p:inputText id="name" value="#{GrouppBean.groupp.name}"
+						placeholder="Name" />
+				</div>
+				<div class="p-field">
+					<p:outputLabel for="revDate" styleClass="ui-sr-only" value="Date" />
+					<p:calendar id="revDate" value="#{GrouppBean.groupp.revDate}"
+						pattern="dd/MM/yyyy" mask="true" placeholder="Date">
+						<f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
+					</p:calendar>
+				</div>
+				<p:commandButton action="#{GrouppBean.add()}" value="Add" />
+			</div>
+		</div>
 	</h:form>
 
-
-
-
-
+	<h:form>
+		<p:dataTable var="groupp" value="#{GrouppBean.groupps}"
+			allowUnsorting="true" sortMode="single">
+			<p:column sortBy="#{groupp.id}" headerText="Id">
+				<h:outputText value="#{groupp.id}" />
+			</p:column>
+			<p:column sortBy="#{groupp.name}" headerText="Name" sortOrder="asc">
+				<h:commandLink action="#{PartsBean.selectGroupp(groupp.id)}"
+					value="#{groupp.name}" />
+			</p:column>
+			<p:column sortBy="#{groupp.revDate}" headerText="Date"
+				sortOrder="asc">
+				<h:outputText value="#{groupp.revDate}">
+					<f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</p:column>
+		</p:dataTable>
+	</h:form>
 </h:body>
 </html>

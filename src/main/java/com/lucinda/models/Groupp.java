@@ -33,18 +33,19 @@ public class Groupp {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public LocalDate getRevDate() {
-		return revDate;
-	}
-	public void setRevDate(LocalDate revDate) {
-		this.revDate = revDate;
-	}
 	public List<Part> getParts() {
 		return parts;
 	}
 	public void setParts(List<Part> parts) {
 		this.parts = parts;
 	}
+	public LocalDate getRevDate() {
+		return revDate;
+	}
+	public void setRevDate(LocalDate revDate) {
+		this.revDate = revDate;
+	}
+	
 	
 	
 	

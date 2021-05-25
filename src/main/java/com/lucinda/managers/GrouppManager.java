@@ -22,5 +22,10 @@ public class GrouppManager {
 		List<Groupp> groupps = this.em.createQuery("SELECT g FROM Groupp g", Groupp.class).getResultList();
 		return groupps;
 	}
+	
+	public Groupp selectGroupp(Integer grouppId) {
+		Groupp groupp = (Groupp) this.em.createQuery("SELECT g FROM Groupp g WHERE id = ?1").setParameter(1, grouppId).getSingleResult();
+		return groupp;
+	}
 
 }

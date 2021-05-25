@@ -7,20 +7,64 @@
 
 
 <h:head>
+	<h:outputStylesheet name="css/primeflex.css" />
 </h:head>
-<f:metadata>
-<f:viewParam name="grouppId" value="#{PartsBean.grouppId}"></f:viewParam>
-<f:event type="preRenderView" listener="#{PartsBean.listAll()}" />
-</f:metadata>
+
 
 <h:body>
-	<f:view>
-		<h:outputLabel value="Hello, world," /><br/>
-		<h:outputLabel value="#{PartsBean.grouppId}" />.
-		<ui:repeat var="part" value="#{PartsBean.parts}">
-		<h:outputLabel value="#{part.name}" />
-		</ui:repeat>
-	</f:view>
 
+	<f:metadata>
+		<f:viewParam name="grouppId" value="#{PartsBean.grouppId}"></f:viewParam>
+		<f:event type="preRenderView" listener="#{PartsBean.listAll()}" />
+	</f:metadata>
+	<h:form>
+		<div class="card">
+			<div class="p-formgroup-inline">
+				<div class="p-field">
+					<p:outputLabel for="name" styleClass="ui-sr-only" value="Name" />
+					<p:inputText value="#{PartsBean.part.name}" id="name"
+						placeholder="Name" />
+				</div>
+				<div class="p-field">
+					<p:outputLabel for="date" styleClass="ui-sr-only" value="Date" />
+					<p:calendar id="date" value="#{PartsBean.part.date}"
+						pattern="dd/MM/yyyy" mask="true" placeholder="Date">
+						<f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
+					</p:calendar>
+				</div>
+				<p:commandButton value="Submit" action="#{PartsBean.add()}" />
+			</div>
+		</div>
+	</h:form>
+	<br />
+	<h:form>
+		<p:dataTable id="parts" widgetVar="dtParts" var="part"
+			value="#{PartsBean.parts}" reflow="true" styleClass="products-table"
+			rowKey="#{part.id}" paginator="true" rows="10"
+			paginatorPosition="bottom" allowUnsorting="true" sortMode="single">
+			<f:facet name="header">
+				<div class="products-table-header">
+					<span style="font-weight: bold">Parts</span>
+				</div>
+			</f:facet>
+			<p:column headerText="Id" sortBy="#{part.id}" filterBy="#{part.id}">
+				<h:outputText value="#{part.id}" />
+			</p:column>
+			<p:column headerText="Name" sortBy="#{part.name}"
+				filterBy="#{part.name}">
+				<h:outputText value="#{part.name}" />
+			</p:column>
+			<p:column headerText="Revision" sortBy="#{part.revision}"
+				filterBy="#{part.revision}">
+				<h:outputText value="#{part.revision}" />
+			</p:column>
+			<p:column headerText="Name" sortBy="#{part.date}"
+				filterBy="#{part.date}">
+				<h:outputText value="#{part.date}">
+					<f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</p:column>
+		</p:dataTable>
+	</h:form>
 </h:body>
 </html>
