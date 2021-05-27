@@ -11,8 +11,6 @@ import com.lucinda.managers.GrouppManager;
 import com.lucinda.managers.PartManager;
 import com.lucinda.models.Part;
 
-
-
 @Named("PartsBean")
 @ApplicationScoped
 public class PartsBean implements Serializable {

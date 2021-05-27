@@ -52,8 +52,7 @@
 			</p:column>
 			<p:column headerText="Name" sortBy="#{part.name}"
 				filterBy="#{part.name}">
-				<h:commandLink action="#{RevisionBean.selectPart(part.id)}"
-					value="#{part.name}" />
+				<h:outputText value="#{part.name}" />
 			</p:column>
 			<p:column headerText="Revision" sortBy="#{part.revision}"
 				filterBy="#{part.revision}">
