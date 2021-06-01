@@ -19,7 +19,7 @@ public class RevisionManager {
 	}
 	
 	public List<Revision> listRevs(Integer partId){
-		List<Revision> revs = this.em.createQuery("select r from Revision where part_id = ?1", Revision.class).setParameter(1, partId).getResultList();
+		List<Revision> revs = this.em.createQuery("select r from Revision r where part_id = ?1", Revision.class).setParameter(1, partId).getResultList();
 		return revs;
 	}
 

@@ -6,7 +6,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.lucinda.models.Groupp;
 import com.lucinda.models.Part;
 
 @Stateless
@@ -28,5 +27,9 @@ public class PartManager {
 	public Part selectPart(Integer partId) {
 		Part part = (Part) this.em.createQuery("SELECT p FROM Part p WHERE id = ?1").setParameter(1, partId).getSingleResult();
 		return part;
+	}
+	
+	public void updateRev(Integer partId, Integer rev) {
+		this.em.createQuery("UPDATE Part p SET revision = ?1 WHERE id = ?2").setParameter(1, rev).setParameter(2, partId).executeUpdate();
 	}
 }

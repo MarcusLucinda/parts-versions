@@ -32,9 +32,6 @@ public class PartsBean implements Serializable {
 	public void listAll() {
 		if(parts == null) {
 			this.parts = pm.listParts(grouppId);
-			for (Part part : parts) {
-				System.out.println("nome " + part.getName());
-			}
 		}
 	}
 

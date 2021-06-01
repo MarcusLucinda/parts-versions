@@ -14,55 +14,61 @@
 <h:body>
 
 	<f:metadata>
-		<f:viewParam name="grouppId" value="#{PartsBean.grouppId}"></f:viewParam>
-		<f:event type="preRenderView" listener="#{PartsBean.listAll()}" />
+		<f:viewParam name="partId" value="#{RevisionBean.partId}"></f:viewParam>
+		<f:event type="preRenderView" listener="#{RevisionBean.listAll()}" />
 	</f:metadata>
 	<h:form>
 		<div class="card">
 			<div class="p-formgroup-inline">
 				<div class="p-field">
-					<p:outputLabel for="name" styleClass="ui-sr-only" value="Name" />
-					<p:inputText value="#{PartsBean.part.name}" id="name"
-						placeholder="Name" />
+					<p:outputLabel for="revision" styleClass="ui-sr-only"
+						value="Revision" />
+					<p:inputText value="#{RevisionBean.rev.revision}" id="revision"
+						placeholder="Revision" />
+				</div>
+				<div class="p-field">
+					<p:outputLabel for="price" styleClass="ui-sr-only" value="Price" />
+					<p:inputText value="#{RevisionBean.rev.price}" id="price"
+						placeholder="Price" />
 				</div>
 				<div class="p-field">
 					<p:outputLabel for="date" styleClass="ui-sr-only" value="Date" />
-					<p:calendar id="date" value="#{PartsBean.part.date}"
+					<p:calendar id="date" value="#{RevisionBean.rev.date}"
 						pattern="dd/MM/yyyy" mask="true" placeholder="Date">
 						<f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
 					</p:calendar>
 				</div>
-				<p:commandButton value="Submit" action="#{PartsBean.add()}" />
+				
 			</div>
+			<div class="ui-fluid p-formgrid p-grid">
+			<div class="p-field p-col-12">
+					<p:outputLabel for="description" styleClass="ui-sr-only" value="description" />
+					<p:inputTextarea value="#{RevisionBean.rev.description}" id="description" rows="4" 
+					placeholder="Description" />
+				</div>
+				</div>
+				<p:commandButton value="Add" action="#{RevisionBean.add()}" />
 		</div>
 	</h:form>
 	<br />
 	<h:form>
-		<p:dataTable id="parts" widgetVar="dtParts" var="part"
-			value="#{PartsBean.parts}" reflow="true" styleClass="products-table"
-			rowKey="#{part.id}" paginator="true" rows="10"
-			paginatorPosition="bottom" allowUnsorting="true" sortMode="single">
+		<p:dataTable id="revs" widgetVar="dtRevs" var="rev"
+			value="#{RevisionBean.revs}" reflow="true"
+			styleClass="products-table" rowKey="#{rev.revision}" paginator="true"
+			rows="10" paginatorPosition="bottom" allowUnsorting="true"
+			sortMode="single">
 			<f:facet name="header">
 				<div class="products-table-header">
-					<span style="font-weight: bold">Parts</span>
+					<span style="font-weight: bold">Revisions</span>
 				</div>
 			</f:facet>
-			<p:column headerText="Id" sortBy="#{part.id}" filterBy="#{part.id}">
-				<h:outputText value="#{part.id}" />
+			<p:column headerText="Revision" sortBy="#{rev.revision}"
+				filterBy="#{rev.revision}">
+				<h:outputText value="#{rev.revision}" />
 			</p:column>
-			<p:column headerText="Name" sortBy="#{part.name}"
-				filterBy="#{part.name}">
-				<h:outputText value="#{part.name}" />
-			</p:column>
-			<p:column headerText="Revision" sortBy="#{part.revision}"
-				filterBy="#{part.revision}">
-				<h:outputText value="#{part.revision}" />
-			</p:column>
-			<p:column headerText="Name" sortBy="#{part.date}"
-				filterBy="#{part.date}">
-				<h:outputText value="#{part.date}">
-					<f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
-				</h:outputText>
+			<p:column headerText="Description" sortBy="#{rev.description}"
+				filterBy="#{rev.description}">
+				<h:outputText value="#{rev.description}" />
 			</p:column>
 		</p:dataTable>
 	</h:form>
