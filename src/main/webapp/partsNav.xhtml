@@ -47,8 +47,8 @@
 					<span style="font-weight: bold">Parts</span>
 				</div>
 			</f:facet>
-			<p:column headerText="Id" sortBy="#{part.id}" filterBy="#{part.id}">
-				<h:outputText value="#{part.id}" />
+			<p:column>
+				<p:graphicImage name="/images/#{part.id}.jpg" styleClass="product-image" width="150" height="100"/>
 			</p:column>
 			<p:column headerText="Name" sortBy="#{part.name}"
 				filterBy="#{part.name}">
@@ -59,7 +59,7 @@
 				filterBy="#{part.revision}">
 				<h:outputText value="#{part.revision}" />
 			</p:column>
-			<p:column headerText="Name" sortBy="#{part.date}"
+			<p:column headerText="Date" sortBy="#{part.date}"
 				filterBy="#{part.date}">
 				<h:outputText value="#{part.date}">
 					<f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />

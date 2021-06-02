@@ -29,3 +29,6 @@ HELP.md
 # Locally stored "Eclipse launch configurations"
 *.launch
 /target/
+
+# Table images
+src/main/webapp/resources/images/**
