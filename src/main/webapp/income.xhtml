@@ -14,45 +14,57 @@
 </f:metadata>
 
 <h:body>
-	<f:metadata>
-		<f:event type="preRenderView" listener="#{GrouppBean.listAll()}" />
-	</f:metadata>
+
 	<h:form>
 		<div class="card">
 			<div class="p-formgroup-inline">
 				<div class="p-field">
-					<p:outputLabel for="name" styleClass="ui-sr-only" value="Name" />
-					<p:inputText id="name" value="#{GrouppBean.groupp.name}"
-						placeholder="Name" />
-				</div>
-				<div class="p-field">
-					<p:outputLabel for="revDate" styleClass="ui-sr-only" value="Date" />
-					<p:calendar id="revDate" value="#{GrouppBean.groupp.revDate}"
-						pattern="dd/MM/yyyy" mask="true" placeholder="Date">
+					<p:outputLabel for="startDate" styleClass="ui-sr-only"
+						value="Start Date" />
+					<p:calendar id="startDate" value='#{IncomeBean.startDate}'
+						pattern="dd/MM/yyyy" mask="true" placeholder="Start Date">
 						<f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
 					</p:calendar>
 				</div>
-				<p:commandButton action="#{GrouppBean.add()}" value="Add" />
+				<div class="p-field">
+					<p:outputLabel for="endDate" styleClass="ui-sr-only"
+						value="End Date" />
+					<p:calendar id="endDate" value="#{IncomeBean.endDate}"
+						pattern="dd/MM/yyyy" mask="true" placeholder="End Date">
+						<f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
+					</p:calendar>
+				</div>
+				<p:commandButton action="#{IncomeBean.selectDates()}" value="Search" />
 			</div>
 		</div>
 	</h:form>
 
 	<h:form>
-		<p:dataTable var="groupp" value="#{GrouppBean.groupps}"
+		<p:dataTable var="rev" value="#{IncomeBean.revs}"
 			allowUnsorting="true" sortMode="single">
-			<p:column sortBy="#{groupp.id}" headerText="Id">
-				<h:outputText value="#{groupp.id}" />
+			<p:column sortBy="#{rev.part.name}" headerText="Part">
+				<h:outputText value="#{rev.part.name}" />
 			</p:column>
-			<p:column sortBy="#{groupp.name}" headerText="Name" sortOrder="asc">
-				<h:commandLink action="#{PartsBean.selectGroupp(groupp.id)}"
-					value="#{groupp.name}" />
+			<p:column sortBy="#{rev.revision}" headerText="Revision" sortOrder="asc">
+				<h:outputText value="#{rev.revision}" />
 			</p:column>
-			<p:column sortBy="#{groupp.revDate}" headerText="Date"
+			<p:column sortBy="#{rev.date}" headerText="Date"
 				sortOrder="asc">
-				<h:outputText value="#{groupp.revDate}">
+				<h:outputText value="#{rev.date}">
 					<f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
 				</h:outputText>
 			</p:column>
+			<p:column sortBy="#{rev.price}" headerText="Income" sortOrder="asc">
+				<h:outputText value="#{rev.price}" />
+			</p:column>
+			
+			<p:columnGroup type="footer">
+                <p:row>
+                    <p:column colspan="3" style="text-align:right" footerText="Total:"/>
+                    <p:column style="text-align:left" footerText="R$ #{IncomeBean.total}"/>
+                </p:row>
+            </p:columnGroup>
+			
 		</p:dataTable>
 	</h:form>
 </h:body>

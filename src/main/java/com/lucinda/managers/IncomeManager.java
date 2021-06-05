@@ -6,8 +6,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import com.lucinda.models.Part;
+import com.lucinda.models.Revision;
 
 @Stateless
 public class IncomeManager {
@@ -15,9 +14,9 @@ public class IncomeManager {
 	@PersistenceContext
 	private EntityManager em;
 	
-	public List<Part> intervalParts (LocalDate startDate, LocalDate endDate){
-		List<Part> parts = em.createQuery("SELECT p FROM Part p WHERE date BETWEEN ?1 AND ?2", Part.class)
+	public List<Revision> intervalParts (LocalDate startDate, LocalDate endDate){
+		List<Revision> revisions = em.createQuery("SELECT r FROM Revision r WHERE date BETWEEN ?1 AND ?2", Revision.class)
 				.setParameter(1, startDate).setParameter(2, endDate).getResultList();
-		return parts;
+		return revisions;
 	}
 }

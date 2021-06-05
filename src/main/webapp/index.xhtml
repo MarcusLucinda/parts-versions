@@ -17,6 +17,15 @@
 	<f:metadata>
 		<f:event type="preRenderView" listener="#{GrouppBean.listAll()}" />
 	</f:metadata>
+
+	<div class="p-mb-2">
+		<h:form>
+			<p:linkButton outcome="income.xhtml" value="Revenue"
+				styleClass="ui-button-success" />
+			<br />
+		</h:form>
+	</div>
+
 	<h:form>
 		<div class="card">
 			<div class="p-formgroup-inline">
